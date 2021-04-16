@@ -1,5 +1,11 @@
 # PIC16B-Project
 
+**Planned Deliverables**
+
+As stated previously, we would have a fully functional web app. The user would be able to upload an image to the web app, our model would process the image, and the web app would provide top matches and information about those matches.
+Full success would include the image recognition model, a program that can scrape information about the animal and provide links, and the fully functional web app.
+Partial success would include just the image recognition model. We will start with that, and if things go to plan, we will have time to work on the web scraping and the webapp after.
+
 **Risks**
 
 1. Poor accuracy
@@ -17,3 +23,10 @@ Another risk with our project is that we have not found a dataset that contains 
 **Ethics**
 
 Because we have not found a dataset encompassing all possible dog breeds or animal species, there would be an inherent bias against the less common breeds or species. Since these data sets focus on what would most likely be seen, they tend to focus on more popular dog breeds/animal species. Therefore, since our project would use data sets that do not include more rare types of animals, these species would not be accounted for. However, since our plan is to show a list of possible species, we would hope that this would influence the user to seek more information about similar animals in physical appearance.
+
+
+
+**Tentative Timeline**
+
+By week 6, we hope to have the image recognition model working. By week 8, we hope to have the web scraping and facts/resource/link collection program working. By week 10, we hope to put everything together onto the web app and add final features.
+
