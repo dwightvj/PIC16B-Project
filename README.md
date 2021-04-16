@@ -6,6 +6,21 @@ As stated previously, we would have a fully functional web app. The user would b
 Full success would include the image recognition model, a program that can scrape information about the animal and provide links, and the fully functional web app.
 Partial success would include just the image recognition model. We will start with that, and if things go to plan, we will have time to work on the web scraping and the webapp after.
 
+**Resources Required**
+
+- [Animals with Attributes](https://cvml.ist.ac.at/AwA2/). This contains  37322 images of 50 animals classes. We can use this database to learn how to create a model that predicts the animal from an image.
+- [Stanford Dog’s Dataset](http://vision.stanford.edu/aditya86/ImageNetDogs/). This dataset contains images of 120 dog breeds and at least 150 images per breed for a total of 20,580 images. Once we have an understanding of how to predict animals from images, we can use this dataset to train a more specific model that can predict dog breeds.
+- [The Oxford-IIIT Pet Dataset](https://www.robots.ox.ac.uk/~vgg/data/pets/). This dataset contains images of 25 dog breeds and 12 cat breeds with roughly 200 images per breed for a total of 7349 images. The dog images could be used in conjunction with the Stanford Dog’s Dataset to increase the training data or test a working model.
+
+There are additional datasets online of animal images and some are very broad containing many animals whereas others are more specific with many breeds of the same animal. Therefore, we do not think we will have trouble finding additional images for our project if necessary. 
+
+**Tools/Skills Required**
+
+- We will need to use computer vision since we will be dealing with images, so *OpenCV* and *Scikit-image* will be useful. 
+- To create a machine learning model to identify the animals, we can use *Tensorflow* and *Keras*. For data manipulation we can use *Pandas* and *Numpy* and to create plots to evaluate our model we can use *Matplotlib*. 
+- To scrape information about animals off the internet we can use *Scrapy*.
+- We will use a combination of *Dash* and *Heroku* in order to deploy our work to the cloud. We intend to create an interactive web application that is capable of handling user data (i.e. jpg/png) and generating a result (likely in the form of the ‘top x’ predicted classes)
+
 **Risks**
 
 1. Poor accuracy
