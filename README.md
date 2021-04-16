@@ -1,4 +1,5 @@
 # PIC16B-Project
+### Kyle Fang, Charisse Hung, Adhvaith Vijay, Britney Zhao
 
 **Planned Deliverables**
 
