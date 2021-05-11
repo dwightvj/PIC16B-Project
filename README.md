@@ -1,6 +1,10 @@
 # PIC16B-Project
 ### Kyle Fang, Charisse Hung, Adhvaith Vijay, Britney Zhao
 
+**Abstract**
+
+We plan to create a webapp that allows users to upload an image. The webapp would then identify the type of animal or breed of dog. No model can achieve 100% accuracy, so the webapp might present its top matches. In addition to the animal name and type, it would also provide interesting facts and links to various resources. The scenario we had in mind was, how would a person identify a dog they saw walking on the street. If they loved a specific dog they briefly met, by using our web application, a user could learn more about that dog’s breed, traits, behaviorisms, etc.
+
 **Planned Deliverables**
 
 As stated previously, we would have a fully functional web app. The user would be able to upload an image to the web app, our model would process the image, and the web app would provide top matches and information about those matches.
