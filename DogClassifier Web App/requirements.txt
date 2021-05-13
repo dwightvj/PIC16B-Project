@@ -1,0 +1,6 @@
+numpy~=1.20.1
+pandas
+streamlit==0.81.1
+tensorflow==2.0.0
+scipy==1.6.2
+h5py==2.10.0
