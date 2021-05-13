@@ -30,7 +30,6 @@ train_datagen = ImageDataGenerator(
     validation_split=0.2,
 )
 
-
 def main():
 
     # Allow the user to upload a image of their dog
@@ -79,10 +78,11 @@ def main():
         pred = model.predict(it)
         score = tf.nn.softmax(pred[0])
         score_array = score.numpy()
-        indices = score_array.argsort()[-5:][::-1]
+        indices = score_array.argsort()[-3:][::-1]
         # tf.keras.backend.clear_session()
         st.write("Load/Compile Time (in seconds) :", timeit.default_timer() - starttime)
-        return re.split(r'(\d+)-', class_names[indices[0]])[-1]
+        # return re.split(r'(\d+)-', class_names[indices[0]])[-1]
+        return [re.split(r'(\d+)-', class_names[indices[i]])[-1] for i in range(len(indices))]
 
     if image is not None:  # if the image is an actual file then
         col1, col2 = st.beta_columns(2)  # split our layout into two columns
@@ -92,7 +92,10 @@ def main():
             # tf.keras.backend.clear_session()
             st.image(image_to_share, width=265)
         with col2:
-            st.write("## The Predicted Class Is:")
+            #st.write("## The Predicted Class Is:")
+            st.write("## Top Predicted Classes Are:")
             predicted_class = make_prediction(image_to_share)
-            st.write('# {}'.format(predicted_class))
+            st.write('# 1.{}'.format(predicted_class[0]))
+            st.write('# 2.{}'.format(predicted_class[1]))
+            st.write('# 3.{}'.format(predicted_class[2]))
             image = None
