@@ -1,15 +1,38 @@
+# import tensorflow as tf
+# from numpy import expand_dims
+# from PIL import Image
+# from tensorflow import keras
+# from tensorflow.keras import applications
+# from tensorflow.keras.models import Model, Sequential
+# from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
+# from tensorflow.keras.layers import Dense, Flatten, Dropout, BatchNormalization, GlobalAveragePooling2D, Activation
+# import streamlit as st
+# import pickle
+# import re
+# import timeit
+
+#######################################################
+import os
+####*IMPORANT*: Have to do this line *before* importing tensorflow
+os.environ['PYTHONHASHSEED']=str(1)
 import tensorflow as tf
 from numpy import expand_dims
 from PIL import Image
 from tensorflow import keras
-from tensorflow.keras import applications
-from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
-from tensorflow.keras.layers import Dense, Flatten, Dropout, BatchNormalization, GlobalAveragePooling2D, Activation
 import streamlit as st
 import pickle
 import re
 import timeit
+import random
+import numpy as np
+
+def reset_random_seeds():
+   os.environ['PYTHONHASHSEED']=str(1)
+   tf.random.set_seed(1)
+   np.random.seed(1)
+   random.seed(1)
+#######################################################
 
 model = tf.keras.models.load_model('my_model.h5')
 loss = 'categorical_crossentropy'
@@ -31,6 +54,7 @@ train_datagen = ImageDataGenerator(
 )
 
 def main():
+    reset_random_seeds()
     # Allow the user to upload a image of their dog
     # tf.keras.backend.clear_session()
     image = None
