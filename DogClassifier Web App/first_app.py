@@ -2,7 +2,6 @@ import tensorflow as tf
 from numpy import expand_dims
 from PIL import Image
 from tensorflow import keras
-import os
 from tensorflow.keras import applications
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
@@ -71,11 +70,11 @@ def main():
 
         # st.write("Load/Compile Time (in seconds) :", timeit.default_timer() - starttime)
         # st.write(image.name)
-        img = img.convert('RGB')
-        foo = img.resize((224, 224), Image.ANTIALIAS)
+        # img = img.convert('RGB')
+        #foo = img.resize((224, 224), Image.ANTIALIAS)
         # foo.save(str(image.name))
         # st.write(os.stat(str(image.name)).st_size)
-        data = img_to_array(foo)
+        data = img_to_array(img)
         # new_data = tf.image.resize(data, [128, 128])
         # new_data = tf.image.resize(data, [224, 224])
         samples = expand_dims(data, 0)
@@ -94,12 +93,13 @@ def main():
         # st.balloons()  # display the ballons
         with col1:  # the first column in our layout will display the image
             image_to_share = Image.open(image)
+            resized_image = image_to_share.resize((224, 224), Image.ANTIALIAS)
             # tf.keras.backend.clear_session()
-            st.image(image_to_share, width=265)
+            st.image(resized_image, width=265)
         with col2:
             #st.write("## The Predicted Class Is:")
             st.write("## Top Predicted Classes Are:")
-            predicted_class = make_prediction(image_to_share)
+            predicted_class = make_prediction(resized_image)
             st.write('# 1.{}'.format(predicted_class[0]))
             st.write('# 2.{}'.format(predicted_class[1]))
             st.write('# 3.{}'.format(predicted_class[2]))
