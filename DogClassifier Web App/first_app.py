@@ -2,6 +2,7 @@ import tensorflow as tf
 from numpy import expand_dims
 from PIL import Image
 from tensorflow import keras
+import os
 from tensorflow.keras import applications
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
@@ -31,7 +32,6 @@ train_datagen = ImageDataGenerator(
 )
 
 def main():
-
     # Allow the user to upload a image of their dog
     # tf.keras.backend.clear_session()
     image = None
@@ -70,10 +70,15 @@ def main():
         # model.load_weights('dog_modelv2.weights')
 
         # st.write("Load/Compile Time (in seconds) :", timeit.default_timer() - starttime)
+        # st.write(image.name)
         img = img.convert('RGB')
-        data = img_to_array(img)
-        new_data = tf.image.resize(data, [224, 224])
-        samples = expand_dims(new_data, 0)
+        foo = img.resize((224, 224), Image.ANTIALIAS)
+        # foo.save(str(image.name))
+        # st.write(os.stat(str(image.name)).st_size)
+        data = img_to_array(foo)
+        # new_data = tf.image.resize(data, [128, 128])
+        # new_data = tf.image.resize(data, [224, 224])
+        samples = expand_dims(data, 0)
         it = train_datagen.flow(samples, batch_size=1)
         pred = model.predict(it)
         score = tf.nn.softmax(pred[0])
