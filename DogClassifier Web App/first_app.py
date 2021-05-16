@@ -95,7 +95,7 @@ def main():
         # st.write("Load/Compile Time (in seconds) :", timeit.default_timer() - starttime)
         # st.write(image.name)
         img = img.convert('RGB')
-        #foo = img.resize((224, 224), Image.ANTIALIAS)
+        # foo = img.resize((224, 224), Image.ANTIALIAS)
         # foo.save(str(image.name))
         # st.write(os.stat(str(image.name)).st_size)
         data = img_to_array(img)
