@@ -13,6 +13,7 @@
 
 #######################################################
 import os
+import pathlib
 ####*IMPORANT*: Have to do this line *before* importing tensorflow
 os.environ['PYTHONHASHSEED']=str(1)
 import tensorflow as tf
@@ -26,6 +27,7 @@ import re
 import timeit
 import random
 import numpy as np
+import time
 
 def reset_random_seeds():
    os.environ['PYTHONHASHSEED']=str(1)
@@ -54,6 +56,9 @@ train_datagen = ImageDataGenerator(
 )
 
 def main():
+
+    st.header("Predict Dog Breed")
+
     reset_random_seeds()
     # Allow the user to upload a image of their dog
     # tf.keras.backend.clear_session()
@@ -94,7 +99,7 @@ def main():
 
         # st.write("Load/Compile Time (in seconds) :", timeit.default_timer() - starttime)
         # st.write(image.name)
-        img = img.convert('RGB')
+        # img = img.convert('RGB')
         # foo = img.resize((224, 224), Image.ANTIALIAS)
         # foo.save(str(image.name))
         # st.write(os.stat(str(image.name)).st_size)
@@ -121,10 +126,16 @@ def main():
             # tf.keras.backend.clear_session()
             st.image(resized_image, width=265)
         with col2:
-            #st.write("## The Predicted Class Is:")
             st.write("## Top Predicted Classes Are:")
-            predicted_class = make_prediction(resized_image)
-            st.write('# 1.{}'.format(predicted_class[0]))
-            st.write('# 2.{}'.format(predicted_class[1]))
-            st.write('# 3.{}'.format(predicted_class[2]))
+            if pathlib.Path(str(image.name)).suffix.lower() == '.png':
+                resized_image = resized_image.convert('RGB')
+
+            with st.spinner('Loading...'):
+                predicted_class = make_prediction(resized_image)
+                l1 = [breed.replace('_',' ').replace('-',' ') for breed in predicted_class]
+                l2 = [re.sub(r'\b[a-z]', lambda m: m.group().upper(), i) for i in l1]
+                l3 = [breed.replace('And','and') for breed in l2]
+                st.write('## **1.{}**'.format(l3[0]))
+                st.write('## **2.{}**'.format(l3[1]))
+                st.write('## **3.{}**'.format(l3[2]))
             image = None
