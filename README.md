@@ -13,6 +13,8 @@ To learn more about the model, navigate to the **Model Architecture** page to se
 
 After using the predictor, please go to the **Give Us Feedback** page so we can understand where our model is succeeding are where it needs improvement.
 
+Additionally, if you navigate to the **Find Your Perfect Dog** page you can gauge based on a short set of questions what dog breeds are best for you. Preference sinclude a canine's size, ability to be trained, and loudness among other things.
+
 ## Using the Dog Breed Recommender
 
 
