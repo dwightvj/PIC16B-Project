@@ -7,19 +7,18 @@ import requests
 from io import BytesIO
 import re
 import random
+from scipy import spatial
 
 df = pd.read_csv("https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dogs.csv")
+# df = df.fillna(0)
 
+# drop mixed breed
 df.drop(89, axis=0, inplace=True)
 df.reset_index(drop=True, inplace=True)
 
 # only choose top 6 columns of greatest variance, drop the rest
-df = df.drop(["name", "dogFriendly", "kidFriendly", "highEnergy", "intelligence", "toleratesHot",
-              "toleratesCold"], axis=1)
-
-# create new vector column for dogs
-df['list'] = df[['size', 'lowShedding', 'easyToGroom',
-                 'goodHealth', 'lowBarking', 'easyToTrain']].values.tolist()
+df = df.drop(["name", "dogFriendly", "kidFriendly", "highEnergy", "intelligence", "toleratesHot", "toleratesCold"],
+             axis=1)
 
 df['lowShedding'] = df['lowShedding'].replace({
     1: 5,
@@ -37,18 +36,47 @@ df['lowBarking'] = df['lowBarking'].replace({
     5: 1
 })
 
-df.rename(columns={'lowShedding': 'Shedding', 'lowBarking': 'Barking'}, inplace=True)
+df['easyToGroom'] = df['easyToGroom'].replace({
+    1: 5,
+    2: 4,
+    3: 3,
+    4: 2,
+    5: 1
+})
 
+df['easyToTrain'] = df['easyToTrain'].replace({
+    1: 5,
+    2: 4,
+    3: 3,
+    4: 2,
+    5: 1
+})
 
-def cossim(l1, l2):
-    return dot(l1, l2) / (norm(l1) * norm(l2))
+df.rename(columns={'lowShedding': 'Shedding', 'lowBarking': 'Barking',
+                   'easyToGroom': 'Grooming', 'easyToTrain': 'Training'}, inplace=True)
 
+# create new vector column for dogs
+df['list'] = df[['size', 'Shedding', 'Grooming',
+                 'goodHealth', 'Barking', 'Training']].values.tolist()
 
+# create list of the behavior attributes lists
+breeds = df['list'].tolist()
+# create KDTree based on these breeds
+tree = spatial.KDTree(breeds)
+
+# recommend the top three breeds that are the "nearest neighbor" to input
 def top3rec(l):
-    breeddict = {}
-    for breed in range(198):
-        breeddict[df.iloc[breed, 0]] = cossim(df.iloc[breed, 7], l)
-    return sorted(breeddict, key=breeddict.get, reverse=True)[:3]
+    # find the indices of the 3 closest vectors to l
+    closest_indices = tree.query(l, k=3)[1]
+
+    # get the vectors of attributes of these 3 indices
+    dogs_behav = [breeds[i] for i in closest_indices]
+
+    # find the indices containing these attribute vectors
+    indices = [breeds.index(dog) for dog in dogs_behav]
+    # get the breed names based on index
+    name = [df.iloc[index, 0] for index in indices]
+    return name
 
 
 def main():
