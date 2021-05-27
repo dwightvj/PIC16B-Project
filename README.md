@@ -19,3 +19,7 @@ After using the predictor, please go to the **Give Us Feedback** page so we can 
 ## Group Contribution
 
 **Adhvaith**: Built initial model with tensorflow and created/hosted web app to host everyone's work
+
+**Kyle**: Helped fintetune model by introducing new breeds to classify. Additionally, web scraped for more data/dog photos to create a database of images we can query for in real-time
+
+**Britney + Charisse** - cleaning the dog attribute dataset, and used KDtree to predict the best dog breed based on user preferences!
