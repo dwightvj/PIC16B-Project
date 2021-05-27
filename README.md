@@ -1,7 +1,7 @@
 # Puppy Party
 ### Kyle Fang, Charisse Hung, Adhvaith Vijay, Britney Zhao
 
-For out PIC 16B project, we created a webapp to satify you dog breed needs. There are two main components to the app, a dog breed predictor, and a dog breed recommender.
+For out PIC 16B project, we created a webapp to satisfy your dog breed needs. There are two main components to the app, a dog breed predictor, and a dog breed recommender.
 
 Link to our [webapp!](https://pic16b-dog-detector.herokuapp.com/)
 
@@ -15,6 +15,7 @@ After using the predictor, please go to the **Give Us Feedback** page so we can 
 
 ## Using the Dog Breed Recommender
 
+Going to the **Find Your Perfect Dog** page brings you to our breed recommender page. Here, you can input a variety of characteristics you want in a dog using the sliders on the page. Then, after clicking submit, the model will display the top three dog breeds that match your wanted characteristics. If you want to try a different set of character traits, simply move the sliders and click submit again, as the model will automatically reset when the sliders are moved. 
 
 ## Group Contribution
 
