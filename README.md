@@ -17,3 +17,5 @@ After using the predictor, please go to the **Give Us Feedback** page so we can 
 
 
 ## Group Contribution
+
+**Adhvaith*: Built initial model with tensorflow and created/hosted web app to host everyone's work
