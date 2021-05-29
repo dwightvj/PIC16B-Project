@@ -18,10 +18,10 @@ import os
 
 #Define file path
 webdriver_path = os.path.normpath(os.getcwd()+"/webdriver/chromedriver")
-image_path = os.path.normpath(os.getcwd()+"/pitbulls") # might need to adjust according to your folder
+image_path = os.path.normpath(os.getcwd()+"/australian_shepherd") # might need to adjust according to your folder
 
 #Add new search key into array ["cat","t-shirt","apple","orange","pear","fish"]
-search_keys= ["pitbulls"]
+search_keys= ["Australian Shepherd dog"]
 
 #Parameters
 number_of_images = 200
