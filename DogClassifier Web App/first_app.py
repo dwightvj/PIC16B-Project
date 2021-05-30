@@ -14,7 +14,6 @@
 #######################################################
 import os
 import pathlib
-import skimage
 
 ####*IMPORANT*: Have to do this line *before* importing tensorflow
 os.environ['PYTHONHASHSEED'] = str(1)
@@ -29,8 +28,6 @@ import re
 import timeit
 import random
 import numpy as np
-import time
-from skimage import measure
 
 
 def reset_random_seeds():
@@ -39,6 +36,16 @@ def reset_random_seeds():
     np.random.seed(1)
     random.seed(1)
 
+try:
+    from cStringIO import StringIO as BytesIO
+except ImportError:
+    from io import BytesIO
+
+# def generate(image, format='jpeg'):
+#     out = BytesIO()
+#     image.save(out, format=format,quality=10)
+#     out.seek(0)
+#     return out
 
 #######################################################
 
@@ -63,6 +70,8 @@ def make_prediction(img):
     '''
     This function takes in a image and model, and uses the model to predict the class of the image
    '''
+
+    # img = Image.open(generate(img))
     data = img_to_array(img)
     samples = expand_dims(data, 0)
     it = train_datagen.flow(samples, batch_size=1)
@@ -99,3 +108,9 @@ def main():
                 st.write('## **1.{}**'.format(l3[0]))
                 st.write('## **2.{}**'.format(l3[1]))
                 st.write('## **3.{}**'.format(l3[2]))
+
+        st.header("**Give Us Feedback Below!**")
+
+        st.markdown("""
+                          <iframe src="https://formfacade.com/headless/101215250839582918673/home/form/1FAIpQLSdT9Wpq4pQ28nc1nSq5NcOaClCm25tzP6AizNrZVWeHcBEMYQ" width="640" height="385" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                        """, unsafe_allow_html=True)
