@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from numpy import dot
+from numpy.linalg import norm
 from PIL import Image
 import requests
 from io import BytesIO

@@ -14,6 +14,8 @@
 #######################################################
 import os
 import pathlib
+import requests
+from io import BytesIO
 
 ####*IMPORANT*: Have to do this line *before* importing tensorflow
 os.environ['PYTHONHASHSEED'] = str(1)
@@ -28,6 +30,7 @@ import re
 import timeit
 import random
 import numpy as np
+import pandas as pd
 
 
 def reset_random_seeds():
@@ -35,6 +38,7 @@ def reset_random_seeds():
     tf.random.set_seed(1)
     np.random.seed(1)
     random.seed(1)
+
 
 # reset_random_seeds()
 
@@ -54,21 +58,59 @@ def reset_random_seeds():
 model = tf.keras.models.load_model('my_model.h5')
 
 #######################################################
-image_to_share = Image.open('golden_retriever_bad.jpg')
-resized_image = image_to_share.resize((224, 224), Image.LANCZOS)
-model.compile(optimizer='adam',loss='binary_crossentropy', metrics=['accuracy'])
-data = img_to_array(resized_image)
-x1 = np.array(([data]))
-test = np.array([0, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0, 1.0, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-       0])
-y1 = np.array([test])
-model.fit(x1, y1, epochs = 3, verbose=0)
+# image_to_share = Image.open('golden_retriever_bad.jpg')
+# resized_image = image_to_share.resize((224, 224), Image.LANCZOS)
+# model.compile(optimizer='adam',loss='binary_crossentropy', metrics=['accuracy'])
+# data = img_to_array(resized_image)
+# x1 = np.array(([data]))
+# test = np.array([0, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0, 1.0, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+#        0])
+# y1 = np.array([test])
+# model.fit(x1, y1, epochs = 3, verbose=0)
+#######################################################
+
+#######################################################
+sheet_url = 'https://docs.google.com/spreadsheets/d/135uA2hSgPFbCKOwFMG2xkn_nG_WWSIXdzoSrQawdz9s/edit#gid=2044474371'
+url_1 = sheet_url.replace('/edit#gid=', '/export?format=csv&gid=')
+df = pd.read_csv(url_1)
+
+pkl_file = open('google_form.pkl', 'rb')
+google_form_dict = pickle.load(pkl_file)
+
+
+def create_y1(breed):
+    zero_array = np.zeros(120)
+    num = google_form_dict[breed]
+    zero_array[num] = 1
+
+    return zero_array
+
+
+wrong_predictions = df.loc[df.iloc[:, 1] == 'No, all predicted classes were incorrect']
+if wrong_predictions.shape[0] > 0:
+    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+    x1_list = []
+    y1_list = []
+    for index, row in wrong_predictions.iterrows():
+        url = row[3].replace('open', 'uc')
+        response = requests.get(url)
+        image = Image.open(BytesIO(response.content))
+        new_image = image.resize((224, 224), Image.LANCZOS)
+        data = img_to_array(new_image)
+        x1_list.append([data])
+        dog = row[2]
+        y1_list.append(create_y1(dog))
+
+    x1 = np.vstack(x1_list)
+    y1 = np.vstack(y1_list)
+    model.fit(x1, y1, epochs=3, verbose=0)
+
 #######################################################
 
 pkl_file = open('class_names.pkl', 'rb')
@@ -135,5 +177,6 @@ def main():
         #                   <iframe src="https://formfacade.com/headless/101215250839582918673/home/form/1FAIpQLSdT9Wpq4pQ28nc1nSq5NcOaClCm25tzP6AizNrZVWeHcBEMYQ" width="640" height="385" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         #                 """, unsafe_allow_html=True)
         st.markdown("""
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdT9Wpq4pQ28nc1nSq5NcOaClCm25tzP6AizNrZVWeHcBEMYQ/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfSIVQCYG-7FqWtXbn3iRzFUdOjyigfK1D_HtDrM1bfFO-YXg/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         """, unsafe_allow_html=True)
+
