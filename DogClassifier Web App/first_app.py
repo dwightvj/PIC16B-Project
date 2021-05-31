@@ -36,10 +36,12 @@ def reset_random_seeds():
     np.random.seed(1)
     random.seed(1)
 
-try:
-    from cStringIO import StringIO as BytesIO
-except ImportError:
-    from io import BytesIO
+# reset_random_seeds()
+
+# try:
+#     from cStringIO import StringIO as BytesIO
+# except ImportError:
+#     from io import BytesIO
 
 # def generate(image, format='jpeg'):
 #     out = BytesIO()
@@ -50,6 +52,24 @@ except ImportError:
 #######################################################
 
 model = tf.keras.models.load_model('my_model.h5')
+
+#######################################################
+image_to_share = Image.open('golden_retriever_bad.jpg')
+resized_image = image_to_share.resize((224, 224), Image.LANCZOS)
+model.compile(optimizer='adam',loss='binary_crossentropy', metrics=['accuracy'])
+data = img_to_array(resized_image)
+x1 = np.array(([data]))
+test = np.array([0, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0, 1.0, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0])
+y1 = np.array([test])
+model.fit(x1, y1, epochs = 3, verbose=0)
+#######################################################
 
 pkl_file = open('class_names.pkl', 'rb')
 class_names = pickle.load(pkl_file)
