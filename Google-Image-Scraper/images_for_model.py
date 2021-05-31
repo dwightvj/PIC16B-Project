@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Jul 12 11:02:06 2020
+Scraper created by OHyic
+YouTube: https://www.youtube.com/watch?v=QZn_ZxpsIw4
+Github: https://github.com/ohyicong/Google-Image-Scraper
 
-@author: OHyic
-https://www.youtube.com/watch?v=QZn_ZxpsIw4
-https://github.com/ohyicong/Google-Image-Scraper
 
 Need to download Chrome Webdriver
 https://chromedriver.chromium.org/downloads
 
 and put it in webdriver folder (replace current webdriver with the new one you'll download)
+                                
+This version of the code scrapes many images. (good for collecting many dog images for our model)
 """
 
 #Import libraries
@@ -20,8 +21,8 @@ import os
 webdriver_path = os.path.normpath(os.getcwd()+"/webdriver/chromedriver")
 image_path = os.path.normpath(os.getcwd()+"/australian_shepherd") # might need to adjust according to your folder
 
-#Add new search key into array ["cat","t-shirt","apple","orange","pear","fish"]
-search_keys= ["Australian Shepherd dog"]
+#Add new search key into array
+search_keys = ["Australian Shepherd dog"]
 
 #Parameters
 number_of_images = 200
