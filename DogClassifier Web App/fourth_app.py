@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-from numpy import dot
-from numpy.linalg import norm
 from PIL import Image
 import requests
 from io import BytesIO
@@ -162,7 +160,6 @@ def main():
             with st.spinner('Loading...'):
                 url = 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/{}'. \
                     format(random.choice(breed3_files))
-                # print(url)
                 response = requests.get(url)
                 img = Image.open(BytesIO(response.content))
                 # st.image(img, caption=captions[2])
