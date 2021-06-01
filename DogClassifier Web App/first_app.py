@@ -91,21 +91,23 @@ def create_y1(breed):
 
     return zero_array
 
-
+# online learning
 wrong_predictions = df.loc[df.iloc[:, 1] == 'No, all predicted classes were incorrect']
 if wrong_predictions.shape[0] > 0:
+    # optimizers have built in assumptions that decay lr over time
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     x1_list = []
     y1_list = []
     for index, row in wrong_predictions.iterrows():
         url = row[3].replace('open', 'uc')
         response = requests.get(url)
-        image = Image.open(BytesIO(response.content))
-        new_image = image.resize((224, 224), Image.LANCZOS)
+        my_image = Image.open(BytesIO(response.content))
+        new_image = my_image.resize((224, 224), Image.LANCZOS)
         data = img_to_array(new_image)
-        x1_list.append([data])
         dog = row[2]
-        y1_list.append(create_y1(dog))
+        if dog != 'Other Breed':
+            x1_list.append([data])
+            y1_list.append(create_y1(dog))
 
     x1 = np.vstack(x1_list)
     y1 = np.vstack(y1_list)
@@ -143,7 +145,7 @@ def make_prediction(img):
 
 
 def main():
-    st.header("Predict Dog Breed")
+    st.header("Predict Dog Breed Using Your Image")
 
     reset_random_seeds()
     image = st.file_uploader("The image of your dog!", ["png", "jpg", "jpeg"], key='file')
@@ -179,4 +181,11 @@ def main():
         st.markdown("""
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfSIVQCYG-7FqWtXbn3iRzFUdOjyigfK1D_HtDrM1bfFO-YXg/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         """, unsafe_allow_html=True)
+
+
+        # st.markdown("""
+        #         <iframe src="https://docs.google.com/forms/d/1hQllP2vqU5umannpVCGV7-380XwHudsZJEUB0w-KpyU/viewform?embedded=true" width="700" height="520" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        #         """, unsafe_allow_html=True)
+
+
 
