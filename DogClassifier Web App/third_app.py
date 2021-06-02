@@ -41,6 +41,7 @@ def reset_random_seeds():
     random.seed(1)
 
 dog_dict = {
+'Chubby Basset0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/extra_data/chubby_bassetv2.jpg',
 'Chihuahua1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/chihuahua/Chihuahua1.jpg',
 'Beagle1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/beagle/Beagle1.jpg',
 'Greyhound0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/greyhound/Greyhound0.jpg',
@@ -97,7 +98,7 @@ def make_prediction(img):
 def main():
     st.header("Predict Dog Breed Using a Sample Image")
     reset_random_seeds()
-    option = st.selectbox('Select an Image!', ('Chihuahua1.jpg', 'Shih Tzu0.jpg', 'Greyhound0.jpg',
+    option = st.selectbox('Select an Image!', ('Chubby Basset0.jpg', 'Chihuahua1.jpg', 'Shih Tzu0.jpg', 'Greyhound0.jpg',
                                                'Old English Sheepdog1.jpg', 'Bloodhound0.jpg', 'Bullmastiff0.jpg',
                                                'Golden Retriever0.jpg', 'Chihuahua2.jpg', 'Bloodhound1.jpg',
                                                'Pomeranian0.jpg', 'Brittany0.jpg', 'Kuvasz0.jpg',
