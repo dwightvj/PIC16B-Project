@@ -1,4 +1,4 @@
-ReadMe and code taken from https://github.com/ohyicong/Google-Image-Scraper.
+Code taken from https://github.com/ohyicong/Google-Image-Scraper.
 
 # Google Image Scraper
 A library to scrap google images
@@ -9,9 +9,11 @@ A library to scrap google images
 3. Download Google Chrome 
 4. Download Google Webdriver based on your Chrome version
 
-## Example:
+## How to use:
 ```
-run main.py
+Run images_for_model.py or images_for_recommendation.py
+
+Adjust update webdriver based on your Chrome version and revise file paths.
 ```
 
 ## Usage:
