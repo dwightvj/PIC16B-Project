@@ -23,6 +23,6 @@ Going to the **Find Your Perfect Dog** page brings you to our breed recommender 
 
 **Kyle:** Helped fine-tune model by introducing new breeds to classify. Additionally, web scraped for more data/dog photos to create a database of images we can query for in real-time.
 
-**Britney:** cleaning the dog attribute dataset, and used KDtree to predict the best dog breed based on user preferences!
+**Britney:** Cleaning the dog attribute dataset, and used KDtree to predict the best dog breed based on user preferences!
 
 **Charisse:** Worked on breed recommender with Britney. Focused on transforming the json file into a cleaned dataframe, feature selection, and a breed recommendation based on cosine similarity.
