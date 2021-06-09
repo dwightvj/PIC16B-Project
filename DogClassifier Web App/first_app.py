@@ -28,7 +28,7 @@ def reset_random_seeds():
     np.random.seed(1)
     random.seed(1)
 
-# load in our model (created in Google Colab)
+# load in our model
 model = tf.keras.models.load_model('tf2model_deprecated_newest.h5')
 
 sheet_url = 'https://docs.google.com/spreadsheets/d/135uA2hSgPFbCKOwFMG2xkn_nG_WWSIXdzoSrQawdz9s/edit#gid=2044474371'
@@ -100,7 +100,7 @@ train_datagen = ImageDataGenerator(
 def make_prediction(img):
     '''
     This function takes in a image and model, and uses the model to predict the class of the image
-    return: top 3 classes (dog breeds)
+    return: top 3 classes (dog breeds) based on user-image
    '''
 
     data = img_to_array(img)

@@ -51,7 +51,6 @@ dog_dict = {
 'Tibetan Mastiff0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/tibetan-mastiff/Tibetan%20Mastiff0.jpg'
 }
 
-# load in our model (created in Google Colab)
 model = tf.keras.models.load_model('tf2model_deprecated_newest.h5')
 
 # read in our class names pickle (acts as our label encoder)
@@ -74,6 +73,7 @@ train_datagen = ImageDataGenerator(
 def make_prediction(img):
     '''
     This function takes in a image and model, and uses the model to predict the class of the image
+    return: top 3 classes (dog breeds) based on user-image
    '''
 
     data = img_to_array(img)
