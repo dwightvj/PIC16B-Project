@@ -3,7 +3,7 @@
 
 For our PIC 16B project, we created a webapp to satisfy your dog breed needs. There are two main components to the app, a dog breed predictor, and a dog breed recommender.
 
-Link to our [webapp!](https://pic16b-dog-detector.herokuapp.com/)
+**Link to our [webapp!](https://pic16b-dog-detector.herokuapp.com/)**
 
 ## Using the Dog Breed Predictor
 
