@@ -55,7 +55,7 @@ def reset_random_seeds():
 
 #######################################################
 
-model = tf.keras.models.load_model('my_model.h5')
+model = tf.keras.models.load_model('tf2model_deprecated_newest.h5')
 
 #######################################################
 # image_to_share = Image.open('golden_retriever_bad.jpg')
@@ -80,12 +80,12 @@ sheet_url = 'https://docs.google.com/spreadsheets/d/135uA2hSgPFbCKOwFMG2xkn_nG_W
 url_1 = sheet_url.replace('/edit#gid=', '/export?format=csv&gid=')
 df = pd.read_csv(url_1)
 
-pkl_file = open('google_form.pkl', 'rb')
+pkl_file = open('all_dog_breeds.pkl', 'rb')
 google_form_dict = pickle.load(pkl_file)
 
 
 def create_y1(breed):
-    zero_array = np.zeros(120)
+    zero_array = np.zeros(121)
     num = google_form_dict[breed]
     zero_array[num] = 1
 

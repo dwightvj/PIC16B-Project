@@ -41,30 +41,31 @@ def reset_random_seeds():
     random.seed(1)
 
 dog_dict = {
-'Chubby Basset0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/extra_data/chubby_bassetv2.jpg',
-'Chihuahua1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/chihuahua/Chihuahua1.jpg',
-'Beagle1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/beagle/Beagle1.jpg',
-'Greyhound0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/greyhound/Greyhound0.jpg',
-'Old English Sheepdog1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/old-english-sheepdog/Old%20English%20Sheepdog1.jpg',
-'Bloodhound0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/bloodhound/Bloodhound0.jpg',
-'Bullmastiff0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/bullmastiff/Bullmastiff0.jpg',
-'Golden Retriever0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/golden-retriever/Golden%20Retriever0.jpg',
-'Chihuahua2.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/chihuahua/Chihuahua2.jpg',
-'Bloodhound1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/bloodhound/Bloodhound1.jpg',
-'Pomeranian0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/pomeranian/Pomeranian0.jpg',
-'Brittany0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/brittany/Brittany0.jpg',
-'Kuvasz0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/kuvasz/Kuvasz0.jpg',
-'Old English Sheepdog0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/old-english-sheepdog/Old%20English%20Sheepdog0.jpg',
-'Golden Retriever1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/golden-retriever/Golden%20Retriever1.jpg',
-'Pomeranian2.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/pomeranian/Pomeranian2.jpg',
-'Shih Tzu0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/shih-tzu/Shih%20Tzu0.jpg',
-'German Shepherd Dog0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/german-shepherd-dog/German%20Shepherd%20Dog0.jpg',
-'Siberian Husky0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/siberian-husky/Siberian%20Husky0.jpg',
-'Great Dane1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/great-dane/Great%20Dane1.jpg',
-'Tibetan Mastiff0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dog_photos/tibetan-mastiff/Tibetan%20Mastiff0.jpg'
+'Australian Shepherd0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/australian-shepherd/Australian%20Shepherd0.jpg',
+'Chubby Basset0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/basset-hound/Basset Hound2.jpg',
+'Chihuahua1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/chihuahua/Chihuahua1.jpg',
+'Beagle1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/beagle/Beagle1.jpg',
+'Greyhound0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/greyhound/Greyhound0.jpg',
+'Old English Sheepdog1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/old-english-sheepdog/Old%20English%20Sheepdog1.jpg',
+'Bloodhound0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/bloodhound/Bloodhound0.jpg',
+'Bullmastiff0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/bullmastiff/Bullmastiff0.jpg',
+'Golden Retriever0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/golden-retriever/Golden%20Retriever0.jpg',
+'Chihuahua2.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/chihuahua/Chihuahua2.jpg',
+'Bloodhound1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/bloodhound/Bloodhound1.jpg',
+'Pomeranian0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/pomeranian/Pomeranian0.jpg',
+'Brittany0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/brittany/Brittany0.jpg',
+'Kuvasz0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/kuvasz/Kuvasz0.jpg',
+'Old English Sheepdog0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/old-english-sheepdog/Old%20English%20Sheepdog0.jpg',
+'Golden Retriever1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/golden-retriever/Golden%20Retriever1.jpg',
+'Pomeranian2.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/pomeranian/Pomeranian2.jpg',
+'Shih Tzu0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/shih-tzu/Shih%20Tzu0.jpg',
+'German Shepherd Dog0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/german-shepherd-dog/German%20Shepherd%20Dog0.jpg',
+'Siberian Husky0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/siberian-husky/Siberian%20Husky0.jpg',
+'Great Dane1.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/great-dane/Great%20Dane1.jpg',
+'Tibetan Mastiff0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/tibetan-mastiff/Tibetan%20Mastiff0.jpg'
 }
 
-model = tf.keras.models.load_model('my_model.h5')
+model = tf.keras.models.load_model('tf2model_deprecated_newest.h5')
 
 pkl_file = open('class_names.pkl', 'rb')
 class_names = pickle.load(pkl_file)
@@ -98,7 +99,7 @@ def make_prediction(img):
 def main():
     st.header("Predict Dog Breed Using a Sample Image")
     reset_random_seeds()
-    option = st.selectbox('Select an Image!', ('Chubby Basset0.jpg', 'Chihuahua1.jpg', 'Shih Tzu0.jpg', 'Greyhound0.jpg',
+    option = st.selectbox('Select an Image!', ('Australian Shepherd0.jpg' , 'Chubby Basset0.jpg', 'Chihuahua1.jpg', 'Shih Tzu0.jpg', 'Greyhound0.jpg',
                                                'Old English Sheepdog1.jpg', 'Bloodhound0.jpg', 'Bullmastiff0.jpg',
                                                'Golden Retriever0.jpg', 'Chihuahua2.jpg', 'Bloodhound1.jpg',
                                                'Pomeranian0.jpg', 'Brittany0.jpg', 'Kuvasz0.jpg',

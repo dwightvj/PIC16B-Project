@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+from numpy import dot
+from numpy.linalg import norm
 from PIL import Image
 import requests
 from io import BytesIO
@@ -7,7 +9,7 @@ import re
 import random
 from scipy import spatial
 
-df = pd.read_csv("https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/dogs.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/breed_characteristics.csv")
 # df = df.fillna(0)
 
 # drop mixed breed
@@ -118,11 +120,11 @@ def main():
         breed2_files = []
         breed3_files = []
         for file in res["tree"]:
-            if "dog_photos/{}/".format(top3_github[0]) in file["path"]:
+            if "data/dog_photos/{}/".format(top3_github[0]) in file["path"]:
                 breed1_files.append(file["path"])
-            elif "dog_photos/{}/".format(top3_github[1]) in file["path"]:
+            elif "data/dog_photos/{}/".format(top3_github[1]) in file["path"]:
                 breed2_files.append(file["path"])
-            elif "dog_photos/{}/".format(top3_github[2]) in file["path"]:
+            elif "data/dog_photos/{}/".format(top3_github[2]) in file["path"]:
                 breed3_files.append(file["path"])
 
         # rand_int = random.randint(0, 2)
