@@ -1,3 +1,5 @@
+ReadMe and code taken from https://github.com/ohyicong/Google-Image-Scraper.
+
 # Google Image Scraper
 A library to scrap google images
 
@@ -38,6 +40,3 @@ for search_key in search_keys:
     image_scrapper.save_images(image_urls)
 
 ```
-## Youtube Video:
-[![IMAGE ALT TEXT](https://github.com/ohyicong/Google-Image-Scraper/blob/master/youtube_thumbnail.PNG)](https://youtu.be/QZn_ZxpsIw4 "Google Image Scraper")
-
