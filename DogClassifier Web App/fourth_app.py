@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-from numpy import dot
-from numpy.linalg import norm
 from PIL import Image
 import requests
 from io import BytesIO
@@ -10,7 +8,6 @@ import random
 from scipy import spatial
 
 df = pd.read_csv("https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/breed_characteristics.csv")
-# df = df.fillna(0)
 
 # drop mixed breed
 df.drop(89, axis=0, inplace=True)
@@ -20,37 +17,10 @@ df.reset_index(drop=True, inplace=True)
 df = df.drop(["name", "dogFriendly", "kidFriendly", "highEnergy", "intelligence", "toleratesHot", "toleratesCold"],
              axis=1)
 
-df['lowShedding'] = df['lowShedding'].replace({
-    1: 5,
-    2: 4,
-    3: 3,
-    4: 2,
-    5: 1
-})
-
-df['lowBarking'] = df['lowBarking'].replace({
-    1: 5,
-    2: 4,
-    3: 3,
-    4: 2,
-    5: 1
-})
-
-df['easyToGroom'] = df['easyToGroom'].replace({
-    1: 5,
-    2: 4,
-    3: 3,
-    4: 2,
-    5: 1
-})
-
-df['easyToTrain'] = df['easyToTrain'].replace({
-    1: 5,
-    2: 4,
-    3: 3,
-    4: 2,
-    5: 1
-})
+df['lowShedding'] = df['lowShedding'].replace({1: 5, 2: 4, 3: 3, 4: 2, 5: 1})
+df['lowBarking'] = df['lowBarking'].replace({1: 5,2: 4,3: 3,4: 2,5: 1})
+df['easyToGroom'] = df['easyToGroom'].replace({1: 5, 2: 4,3: 3,4: 2,5: 1})
+df['easyToTrain'] = df['easyToTrain'].replace({1: 5,2: 4,3: 3,4: 2,5: 1})
 
 df.rename(columns={'lowShedding': 'Shedding', 'lowBarking': 'Barking',
                    'easyToGroom': 'Grooming', 'easyToTrain': 'Training'}, inplace=True)
@@ -66,6 +36,10 @@ tree = spatial.KDTree(breeds)
 
 # recommend the top three breeds that are the "nearest neighbor" to input
 def top3rec(l):
+    '''
+    :param l: the vector provided by the user (based on their preferences)
+    :return: dog breed
+    '''
     # find the indices of the 3 closest vectors to l
     closest_indices = tree.query(l, k=3)[1]
 
@@ -111,7 +85,7 @@ def main():
         l3 = [re.sub(r'\b[a-z]', lambda m: m.group().upper(), i) for i in l2]
         captions = [breed.replace('And', 'and') for breed in l3]
 
-        # recursively query for things we need
+        # recursively query from our GitHub for our database of images!
         url = "https://api.github.com/repos/{}/{}/git/trees/main?recursive=1".format('dwightvj', 'PIC16B-Project')
         r = requests.get(url)
         res = r.json()
@@ -127,19 +101,17 @@ def main():
             elif "data/dog_photos/{}/".format(top3_github[2]) in file["path"]:
                 breed3_files.append(file["path"])
 
-        # rand_int = random.randint(0, 2)
-
         col1, col2, col3 = st.beta_columns(3)
 
+        # format and get the recommended breeds to display across 3 columns
         with col1:
             st.subheader('Top Match')
             with st.spinner('Loading...'):
                 url = 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/{}'. \
                     format(random.choice(breed1_files))
-                # print(url)
+
                 response = requests.get(url)
                 img = Image.open(BytesIO(response.content))
-                # st.image(img, caption= captions[0])
 
                 st.image(img)
                 st.write("[{0}](https://www.akc.org/dog-breeds/{1}/)".format(captions[0], captions[0].lower().
@@ -149,10 +121,9 @@ def main():
             with st.spinner('Loading...'):
                 url = 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/{}'. \
                     format(random.choice(breed2_files))
-                # print(url)
+
                 response = requests.get(url)
                 img = Image.open(BytesIO(response.content))
-                # st.image(img, caption=captions[1])
 
                 st.image(img)
                 st.write("[{0}](https://www.akc.org/dog-breeds/{1}/)".format(captions[1], captions[1].lower().
@@ -164,7 +135,6 @@ def main():
                     format(random.choice(breed3_files))
                 response = requests.get(url)
                 img = Image.open(BytesIO(response.content))
-                # st.image(img, caption=captions[2])
 
                 st.image(img)
                 st.write("[{0}](https://www.akc.org/dog-breeds/{1}/)".format(captions[2], captions[2].lower().

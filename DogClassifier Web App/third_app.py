@@ -1,23 +1,6 @@
-# import tensorflow as tf
-# from numpy import expand_dims
-# from PIL import Image
-# from tensorflow import keras
-# from tensorflow.keras import applications
-# from tensorflow.keras.models import Model, Sequential
-# from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, img_to_array
-# from tensorflow.keras.layers import Dense, Flatten, Dropout, BatchNormalization, GlobalAveragePooling2D, Activation
-# import streamlit as st
-# import pickle
-# import re
-# import timeit
-
-#######################################################
 import os
-import pathlib
 import requests
-from io import BytesIO
 
-####*IMPORANT*: Have to do this line *before* importing tensorflow
 os.environ['PYTHONHASHSEED'] = str(1)
 import tensorflow as tf
 from numpy import expand_dims
@@ -30,16 +13,19 @@ import re
 import timeit
 import random
 import numpy as np
-import pandas as pd
 
 
-
+# ensure repeatability in our predictions
 def reset_random_seeds():
+    '''
+    generate random seed to ensure same predictions are outputted upon user input!
+    '''
     os.environ['PYTHONHASHSEED'] = str(1)
     tf.random.set_seed(1)
     np.random.seed(1)
     random.seed(1)
 
+# dictionary of pre-defined images and the data in question (accessed from our team's GitHub)
 dog_dict = {
 'Australian Shepherd0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/australian-shepherd/Australian%20Shepherd0.jpg',
 'Chubby Basset0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/basset-hound/Basset Hound2.jpg',
@@ -65,11 +51,14 @@ dog_dict = {
 'Tibetan Mastiff0.jpg' : 'https://raw.githubusercontent.com/dwightvj/PIC16B-Project/main/data/dog_photos/tibetan-mastiff/Tibetan%20Mastiff0.jpg'
 }
 
+# load in our model (created in Google Colab)
 model = tf.keras.models.load_model('tf2model_deprecated_newest.h5')
 
+# read in our class names pickle (acts as our label encoder)
 pkl_file = open('class_names.pkl', 'rb')
 class_names = pickle.load(pkl_file)
 
+# image transformations to make data easier to process
 train_datagen = ImageDataGenerator(
     rescale=1. / 255,
     shear_range=0.2,
@@ -87,11 +76,12 @@ def make_prediction(img):
     This function takes in a image and model, and uses the model to predict the class of the image
    '''
 
-    # img = Image.open(generate(img))
     data = img_to_array(img)
     samples = expand_dims(data, 0)
     it = train_datagen.flow(samples, batch_size=1)
+    # pred our class of interest
     pred = model.predict(it)
+    # get the top 3 classes in order of most to least likely
     indices = pred[0].argsort()[-3:][::-1]
     return [re.split(r'(\d+)-', class_names[indices[i]])[-1] for i in range(len(indices))]
 
@@ -99,6 +89,7 @@ def make_prediction(img):
 def main():
     st.header("Predict Dog Breed Using a Sample Image")
     reset_random_seeds()
+    # allow user to select image of dog from our list of different dog breeds/images
     option = st.selectbox('Select an Image!', ('Australian Shepherd0.jpg' , 'Chubby Basset0.jpg', 'Chihuahua1.jpg', 'Shih Tzu0.jpg', 'Greyhound0.jpg',
                                                'Old English Sheepdog1.jpg', 'Bloodhound0.jpg', 'Bullmastiff0.jpg',
                                                'Golden Retriever0.jpg', 'Chihuahua2.jpg', 'Bloodhound1.jpg',
@@ -120,19 +111,15 @@ def main():
                 st.image(resized_image, width=265)
             with col2:
                 st.write("## Top Predicted Classes Are:")
-                # if pathlib.Path(str(image.name)).suffix.lower() == '.png':
-                #     resized_image = resized_image.convert('RGB')
 
                 with st.spinner('Loading...'):
                     predicted_class = make_prediction(resized_image)
+                    # regex to remove punctuation
                     l1 = [breed.replace('_', ' ').replace('-', ' ') for breed in predicted_class]
                     l2 = [re.sub(r'\b[a-z]', lambda m: m.group().upper(), i) for i in l1]
                     l3 = [breed.replace('And', 'and') for breed in l2]
+                    # formatting
                     st.write("Load/Compile Time (in seconds) :", timeit.default_timer() - starttime)
                     st.write('## **1.{}**'.format(l3[0]))
                     st.write('## **2.{}**'.format(l3[1]))
                     st.write('## **3.{}**'.format(l3[2]))
-
-
-
-
