@@ -26,3 +26,6 @@ Going to the **Find Your Perfect Dog** page brings you to our breed recommender 
 **Britney:** Cleaning the dog attribute dataset, and used KDtree to predict the best dog breed based on user preferences!
 
 **Charisse:** Worked on breed recommender with Britney. Focused on transforming the json file into a cleaned dataframe, feature selection, and a breed recommendation based on cosine similarity.
+
+## Future steps
+One suggestion to further improve our project is to include more dog breeds. Currently, the breed prediction model is trained on 121 breeds and the breed recommender includes 199 breeds. There are many more dog breeds that could be included in these two aspects of our project. Furthermore, our breed prediction model is trained on images of purebred dogs, and thus it does not perform as well on mixed breed dogs. If we could obtain or create a database of mixed breed dogs that included the list of breeds that each dog is, we could further train the model to predict the multiple breeds of a dog. This does pose many challenges since the amount of breed combinations is very great, however, it would allow our project to be more inclusive of dogs.
