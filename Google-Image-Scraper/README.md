@@ -1,7 +1,7 @@
 Code taken from https://github.com/ohyicong/Google-Image-Scraper.
 
 # Google Image Scraper
-A library to scrap google images
+A library to scrape google images
 
 ## Pre-requisites:
 1. Pip install Selenium Library
