@@ -17,11 +17,13 @@ df.reset_index(drop=True, inplace=True)
 df = df.drop(["name", "dogFriendly", "kidFriendly", "highEnergy", "intelligence", "toleratesHot", "toleratesCold"],
              axis=1)
 
+# change scaling of attributes in dataset to match the number scale on web app
 df['lowShedding'] = df['lowShedding'].replace({1: 5, 2: 4, 3: 3, 4: 2, 5: 1})
 df['lowBarking'] = df['lowBarking'].replace({1: 5,2: 4,3: 3,4: 2,5: 1})
 df['easyToGroom'] = df['easyToGroom'].replace({1: 5, 2: 4,3: 3,4: 2,5: 1})
 df['easyToTrain'] = df['easyToTrain'].replace({1: 5,2: 4,3: 3,4: 2,5: 1})
 
+# rename the columns to be more general for web app
 df.rename(columns={'lowShedding': 'Shedding', 'lowBarking': 'Barking',
                    'easyToGroom': 'Grooming', 'easyToTrain': 'Training'}, inplace=True)
 
@@ -31,14 +33,14 @@ df['list'] = df[['size', 'Shedding', 'Grooming',
 
 # create list of the behavior attributes lists
 breeds = df['list'].tolist()
-# create KDTree based on these breeds
+# create KDTree based on this list of behavior attributes "breeds"
 tree = spatial.KDTree(breeds)
 
 # recommend the top three breeds that are the "nearest neighbor" to input
 def top3rec(l):
     '''
     :param l: the vector provided by the user (based on their preferences)
-    :return: dog breed
+    :return: top 3 closest dog breeds
     '''
     # find the indices of the 3 closest vectors to l
     closest_indices = tree.query(l, k=3)[1]
@@ -55,7 +57,7 @@ def top3rec(l):
 
 def main():
     st.header("Find Your Perfect Dog")
-    # st.write("\n")
+    
     st.write("### *What Do You Look For in a Dog?*")
     size = st.select_slider('1. Size', options=['Petite', 2, 3, 4, 'Large'], value=3)
     shedding = st.select_slider('2. Shedding', options=['Very Little', 2, 3, 4, 'Excessive'], value=2)
@@ -74,11 +76,8 @@ def main():
 
         # access breed needed
         top3breeds = top3rec(list(map(dct.get, user_input)))
-        # l1 = [breed.replace('_', ' ').replace(' ', '-') for breed in top3breeds]
-        # top3_github = list(map(str.lower, l1))
-        top3_github = top3breeds
 
-        # print(top3_github)
+        top3_github = top3breeds
 
         # captions
         l2 = [breed.replace('_', ' ').replace('-', ' ') for breed in top3breeds]
