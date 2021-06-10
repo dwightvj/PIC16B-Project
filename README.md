@@ -13,6 +13,10 @@ After using the predictor, please fill out the feedback form that will appear so
 
 To learn more about the model, navigate to the **Model Architecture** page to see the structure of the convolutional neural network.
 
+### Using a Sample Image
+
+If you do not have an image of a dog, but you would still like to use our Dog Breed Predictor, navigate to the **Use a Sample Image** page of our web application. Here, there is a dropdown menu where you can select from a gallery of photos. Once you have chosen a picture, click submit and the top three predicted breeds will appear, exactly like our **Predict Dog Breed** page. Each picture is named based on its dog breed, so you can see the accuracy of our predictor!
+
 ## Using the Dog Breed Recommender
 
 Going to the **Find Your Perfect Dog** page brings you to our breed recommender page. Here, you can input a variety of characteristics you want in a dog using the sliders on the page. Then, after clicking submit, the model will display the top three dog breeds that match your wanted characteristics. If you want to try a different set of character traits, simply move the sliders and click submit again, as the model will automatically reset when the sliders are moved. 
